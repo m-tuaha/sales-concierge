@@ -1,34 +1,203 @@
 "use client";
 
-import { useCallback } from "react";
-import { ChatKitPanel, type FactAction } from "@/components/ChatKitPanel";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import type { CSSProperties } from "react";
+import { ChatKitPanel } from "@/components/ChatKitPanel";
 
 export default function App() {
-  const { scheme, setScheme } = useColorScheme();
+  // --- Inline styles using your palette ---
+  const pageStyle: CSSProperties = {
+    minHeight: "100vh",
+    backgroundColor: "#ffffff",
+    color: "#000000",
+    display: "flex",
+    flexDirection: "column",
+  };
 
-  const handleWidgetAction = useCallback(async (action: FactAction) => {
-    if (process.env.NODE_ENV !== "production") {
-      console.info("[ChatKitPanel] widget action", action);
-    }
-  }, []);
+  const headerStyle: CSSProperties = {
+    width: "100%",
+    borderBottom: "1px solid #e8e8e8",
+    backgroundColor: "#d9f6ea",
+  };
 
-  const handleResponseEnd = useCallback(() => {
-    if (process.env.NODE_ENV !== "production") {
-      console.debug("[ChatKitPanel] response end");
-    }
-  }, []);
+  const headerInnerStyle: CSSProperties = {
+    maxWidth: "960px",
+    margin: "0 auto",
+    padding: "12px 16px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "12px",
+    fontSize: "14px",
+    fontWeight: 600,
+  };
+
+  const betaPillStyle: CSSProperties = {
+    display: "inline-flex",
+    alignItems: "center",
+    borderRadius: "999px",
+    backgroundColor: "#7fdfb8",
+    padding: "4px 10px",
+    fontSize: "11px",
+    fontWeight: 500,
+  };
+
+  const mainStyle: CSSProperties = {
+    flex: 1,
+  };
+
+  const contentWrapperStyle: CSSProperties = {
+    maxWidth: "960px",
+    margin: "0 auto",
+    padding: "24px 16px 32px",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.1fr) minmax(0, 1.3fr)",
+    alignItems: "flex-start",
+    gap: "24px",
+  };
+
+  const leftColumnStyle: CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  };
+
+  const headingStyle: CSSProperties = {
+    fontSize: "26px",
+    fontWeight: 600,
+    margin: 0,
+  };
+
+  const subTextStyle: CSSProperties = {
+    fontSize: "14px",
+    lineHeight: 1.5,
+    color: "#4b5563",
+    margin: 0,
+  };
+
+  const labelStyle: CSSProperties = {
+    fontSize: "11px",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    color: "#6b7280",
+  };
+
+  const chipsRowStyle: CSSProperties = {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+  };
+
+  const chipStyle: CSSProperties = {
+    borderRadius: "999px",
+    border: "1px solid transparent",
+    backgroundColor: "#d9f6ea",
+    padding: "6px 12px",
+    fontSize: "12px",
+    cursor: "default",
+  };
+
+  const noteStyle: CSSProperties = {
+    fontSize: "11px",
+    color: "#6b7280",
+    lineHeight: 1.5,
+  };
+
+  const rightColumnStyle: CSSProperties = {
+    borderRadius: "16px",
+    border: "1px solid #e8e8e8",
+    backgroundColor: "#ffffff",
+    boxShadow: "0 8px 24px rgba(0,0,0,0.04)",
+    overflow: "hidden",
+    minHeight: "420px",
+    display: "flex",
+    flexDirection: "column",
+  };
+
+  // Responsive tweak for very narrow screens (simple approach)
+  const isBrowser =
+    typeof window !== "undefined" && window.innerWidth <= 768;
+
+  const contentStyleResponsive: CSSProperties = isBrowser
+    ? {
+        ...contentWrapperStyle,
+        gridTemplateColumns: "minmax(0,1fr)",
+      }
+    : contentWrapperStyle;
+
+  const quickPrompts = [
+    "Hyber product manual",
+    "CPaaS pricing deck",
+    "WhatsApp chatbot case studies",
+    "Latest sales training recording",
+  ];
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-end bg-slate-100 dark:bg-slate-950">
-      <div className="mx-auto w-full max-w-5xl">
-        <ChatKitPanel
-          theme={scheme}
-          onWidgetAction={handleWidgetAction}
-          onResponseEnd={handleResponseEnd}
-          onThemeRequest={setScheme}
-        />
-      </div>
-    </main>
+    <div style={pageStyle}>
+      {/* Top bar */}
+      <header style={headerStyle}>
+        <div style={headerInnerStyle}>
+          <div>GMS Sales Concierge</div>
+          <span style={betaPillStyle}>Beta</span>
+        </div>
+      </header>
+
+      {/* Main content */}
+      <main style={mainStyle}>
+        <div style={contentStyleResponsive}>
+          {/* Left column */}
+          <section style={leftColumnStyle}>
+            <div>
+              <h1 style={headingStyle}>GMS Sales Concierge</h1>
+              <p style={subTextStyle}>
+                Phase-1: a link directory bot. Ask for any GMS sales asset and
+                I’ll return the right SharePoint or Stream URL — nothing else.
+              </p>
+            </div>
+
+            <div>
+              <div style={labelStyle}>Try asking for</div>
+              <div style={chipsRowStyle}>
+                {quickPrompts.map((label) => (
+                  <button
+                    key={label}
+                    type="button"
+                    style={chipStyle}
+                    // purely visual for now; ChatKit already has starter prompts
+                    onClick={() => {
+                      console.log("Clicked quick prompt:", label);
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <p style={noteStyle}>
+              Note: This assistant is designed only to surface official GMS
+              SharePoint and Stream links. It won’t summarize or open documents.
+            </p>
+          </section>
+
+          {/* Right column – ChatKit panel */}
+          <section style={rightColumnStyle}>
+                
+            
+            <ChatKitPanel
+              theme="light"
+              onWidgetAction={async () => {
+                // no-op for now
+              }}
+              onResponseEnd={() => {
+                // no-op for now
+              }}
+              onThemeRequest={() => {
+                // no-op for now
+              }}
+            />
+          </section>
+        </div>
+      </main>
+    </div>
   );
 }
