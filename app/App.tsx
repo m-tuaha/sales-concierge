@@ -150,7 +150,7 @@ export default function App() {
               <h1 style={headingStyle}>GMS Sales Concierge</h1>
               <p style={subTextStyle}>
                 Phase-1: a link directory bot. Ask for any GMS sales asset and
-                I’ll return the right SharePoint or Stream URL — nothing else.
+                I’ll return the right SharePoint URL.
               </p>
             </div>
 
@@ -175,7 +175,7 @@ export default function App() {
 
             <p style={noteStyle}>
               Note: This assistant is designed only to surface official GMS
-              SharePoint and Stream links. It won’t summarize or open documents.
+              SharePoint links. It won’t summarize or open documents.
             </p>
           </section>
 

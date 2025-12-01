@@ -29,10 +29,10 @@ export const STARTER_PROMPTS: StartScreenPrompt[] = [
 ];
 
 export const PLACEHOLDER_INPUT =
-  "Ask for a manual, deck, case study, or Stream recording…";
+  "Ask for product overview, slide deck, demo or training materials …";
 
 export const GREETING =
-  "Hi, I’m the GMS Sales Concierge. Ask for any sales asset and I’ll return the official SharePoint or Stream link.";
+  "Hi, I’m the GMS Sales Concierge. Ask for any sales asset and I’ll return the official SharePoint link.";
 
 // ---- Theme: align with gms.net palette ----
 // Palette you gave:
