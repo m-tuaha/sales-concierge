@@ -1,9 +1,20 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChatKitPanel } from "@/components/ChatKitPanel";
+import { useRouter } from "next/navigation";
+import { createSupabaseClient } from "@/lib/supabaseClient";
 
 export default function App() {
+  const router = useRouter();
+  const supabase = useMemo(() => createSupabaseClient(), []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
+
   // --- Inline styles using your palette ---
   const pageStyle: CSSProperties = {
     minHeight: "100vh",
@@ -29,6 +40,12 @@ export default function App() {
     gap: "12px",
     fontSize: "14px",
     fontWeight: 600,
+  };
+
+  const headerRightStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
   };
 
   const betaPillStyle: CSSProperties = {
@@ -113,11 +130,25 @@ export default function App() {
     flexDirection: "column",
   };
 
-  // Responsive tweak for very narrow screens (simple approach)
-  const isBrowser =
-    typeof window !== "undefined" && window.innerWidth <= 768;
+  const [isNarrowLayout, setIsNarrowLayout] = useState(false);
 
-  const contentStyleResponsive: CSSProperties = isBrowser
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const updateLayout = () => {
+      setIsNarrowLayout(window.innerWidth <= 768);
+    };
+
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+    return () => {
+      window.removeEventListener("resize", updateLayout);
+    };
+  }, []);
+
+  const contentStyleResponsive: CSSProperties = isNarrowLayout
     ? {
         ...contentWrapperStyle,
         gridTemplateColumns: "minmax(0,1fr)",
@@ -137,7 +168,24 @@ export default function App() {
       <header style={headerStyle}>
         <div style={headerInnerStyle}>
           <div>GMS Sales Concierge</div>
-          <span style={betaPillStyle}>Beta</span>
+          <div style={headerRightStyle}>
+            <span style={betaPillStyle}>Beta</span>
+            <button
+              type="button"
+              onClick={handleLogout}
+              style={{
+                borderRadius: "10px",
+                border: "1px solid #e8e8e8",
+                backgroundColor: "#ffffff",
+                padding: "6px 12px",
+                fontSize: "12px",
+                fontWeight: 600,
+                cursor: "pointer",
+              }}
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
