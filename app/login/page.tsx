@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createSupabaseClient } from "@/lib/supabaseClient";
-import HomeBackground from "./gms-home.jpg";
+import HomeBackground from "./gms-home.png";
 import GmsLogo from "../gms-logo.png";
 
 export default function LoginPage() {
