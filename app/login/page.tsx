@@ -2,8 +2,11 @@
 
 import type { FormEvent } from "react";
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { createSupabaseClient } from "@/lib/supabaseClient";
+import HomeBackground from "./gms-home.jpg";
+import GmsLogo from "../gms-logo.png";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,8 +43,11 @@ export default function LoginPage() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#d9f6ea",
         padding: "24px",
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url(${HomeBackground.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div
@@ -58,10 +64,27 @@ export default function LoginPage() {
           gap: "16px",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <h1 style={{ margin: 0, fontSize: "20px", fontWeight: 600 }}>
-            GMS Sales Concierge
-          </h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <Image
+              src={GmsLogo}
+              alt="GMS logo"
+              width={40}
+              height={40}
+              priority
+              style={{ borderRadius: "8px" }}
+            />
+            <h1 style={{ margin: 0, fontSize: "20px", fontWeight: 600 }}>
+              GMS Sales Concierge
+            </h1>
+          </div>
           <span
             style={{
               backgroundColor: "#7fdfb8",

@@ -2,9 +2,11 @@
 
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { ChatKitPanel } from "@/components/ChatKitPanel";
 import { useRouter } from "next/navigation";
 import { createSupabaseClient } from "@/lib/supabaseClient";
+import GmsLogo from "./gms-logo.png";
 
 export default function App() {
   const router = useRouter();
@@ -39,6 +41,14 @@ export default function App() {
     justifyContent: "space-between",
     gap: "12px",
     fontSize: "14px",
+    fontWeight: 600,
+  };
+
+  const headerTitleStyle: CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    fontSize: "16px",
     fontWeight: 600,
   };
 
@@ -171,7 +181,17 @@ export default function App() {
       {/* Top bar */}
       <header style={headerStyle}>
         <div style={headerInnerStyle}>
-          <div>GMS Sales Concierge</div>
+          <div style={headerTitleStyle}>
+            <Image
+              src={GmsLogo}
+              alt="GMS logo"
+              width={40}
+              height={40}
+              priority
+              style={{ borderRadius: "8px" }}
+            />
+            <div>GMS Sales Concierge</div>
+          </div>
           <div style={headerRightStyle}>
             <span style={betaPillStyle}>Phase 1</span>
             <button
