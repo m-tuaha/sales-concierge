@@ -156,10 +156,14 @@ export default function App() {
     : contentWrapperStyle;
 
   const quickPrompts = [
+    "Viber Pitch Deck",
+    "WhatsApp Demo Video",
     "Hyber product manual",
-    "CPaaS pricing deck",
-    "WhatsApp chatbot case studies",
-    "Latest sales training recording",
+    "RCS Product Overview",
+    "Gen AI Content Builder",
+    "Email API Slides",
+    "SSO Portal Guide",
+    "Viber Business Calls training"
   ];
 
   return (
@@ -169,7 +173,7 @@ export default function App() {
         <div style={headerInnerStyle}>
           <div>GMS Sales Concierge</div>
           <div style={headerRightStyle}>
-            <span style={betaPillStyle}>Beta</span>
+            <span style={betaPillStyle}>Phase 1</span>
             <button
               type="button"
               onClick={handleLogout}
@@ -195,10 +199,9 @@ export default function App() {
           {/* Left column */}
           <section style={leftColumnStyle}>
             <div>
-              <h1 style={headingStyle}>GMS Sales Concierge</h1>
+              <h1 style={headingStyle}>GMS Sales Assistant</h1>
               <p style={subTextStyle}>
-                Phase-1: a link directory bot. Ask for any GMS sales asset and
-                I’ll return the right SharePoint URL.
+                Phase-1: Ask for any GMS sales asset and I’ll return its SharePoint URL.
               </p>
             </div>
 

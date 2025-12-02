@@ -72,13 +72,12 @@ export default function LoginPage() {
               alignSelf: "flex-start",
             }}
           >
-            Beta
+            Phase 1
           </span>
         </div>
 
         <p style={{ margin: 0, color: "#4b5563", fontSize: "14px" }}>
-          Sign in with your Supabase email and password to access the internal
-          concierge.
+          Sign in with your email and password to access the Sales Assistant.
         </p>
 
         <form

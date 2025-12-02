@@ -11,20 +11,20 @@ export const CREATE_SESSION_ENDPOINT = "/api/create-session";
 export const STARTER_PROMPTS: StartScreenPrompt[] = [
   {
     label: "Hyber product manual",
-    prompt: "Share the latest Hyber product manual (SharePoint link only).",
+    prompt: "Share the Hyber user guide.",
   },
   {
-    label: "CPaaS pricing deck",
-    prompt: "Send me the CPaaS pricing deck we use for new sales prospects.",
+    label: "RCS Product Deck",
+    prompt: "Share the RCS product slide decks",
   },
   {
-    label: "WhatsApp chatbot case studies",
+    label: "Gen AI content builder",
     prompt:
-      "Link to GMS WhatsApp / chatbot case studies for telecom and enterprise clients.",
+      "Share the Gen AI content builder materials for Campaign Platform",
   },
   {
-    label: "Sales training recording",
-    prompt: "Share the latest GMS sales training Stream recording.",
+    label: "WhatsApp demo video",
+    prompt: "Share demo video of WhatsApp capabilities in Campaign Platform",
   },
 ];
 
@@ -32,7 +32,7 @@ export const PLACEHOLDER_INPUT =
   "Ask for product overview, slide deck, demo or training materials …";
 
 export const GREETING =
-  "Hi, I’m the GMS Sales Concierge. Ask for any sales asset and I’ll return the official SharePoint link.";
+  "Hey there, I’m the GMS Sales Assistant. Ask for any sales asset and I’ll return its SharePoint link.";
 
 // ---- Theme: align with gms.net palette ----
 // Palette you gave:
